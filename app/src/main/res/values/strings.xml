@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Miriad</string>
+    <string name="mrd_app_name">Miriad</string>
+    <string name="mrd_hint_username">Username</string>
+    <string name="mrd_hint_password">Password</string>
+    <string name="mrd_button_next">Next</string>
+    <string name="mrd_button_cancel">Cancel</string>
+    <string name="mrd_error_password">Password must contain at least 8 characters.</string>
+    <string name="mrd_empty_field_error">This field cannot be left empty.</string>
+
+</resources>

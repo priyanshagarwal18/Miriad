@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/mainBackground">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:elevation="0dp"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/app_bar"
+            style="@style/Widget.Miriad.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:paddingEnd="12dp"
+            android:paddingRight="12dp"
+            app:contentInsetStart="0dp"
+            app:title="Miriad"
+            app:titleTextColor="#ffffff"/>
+    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userNameTextView"
+        android:text="HI"
+        android:textSize="30dp"
+        android:textColor="@color/Primary_Color1"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/timeLayout"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:padding="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Miriad.TextView"
+            android:text="Choose Time"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5:00"
+            android:layout_margin="30dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/five"
+
+            />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:layout_margin="30dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/ten"
+
+                />
+        </LinearLayout>
+    </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_margin="10dp"
+    android:visibility="gone"
+    android:id="@+id/questionLayout"
+    android:padding="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout1"
+        android:layout_alignParentTop="true"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:padding="0dp"
+            style="@style/Widget.Miriad.TextView"
+            android:text="Best"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:padding="0dp"
+            style="@style/Widget.Miriad.TextView"
+            android:text="Score"/>
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+            android:padding="0dp"
+            style="@style/Widget.Miriad.TextView"
+            android:text="Timer"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/linearLayout1"
+        android:id="@+id/linearLayout2"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:padding="0dp"
+            style="@style/Widget.Miriad.TextView"
+            android:id="@+id/bestScore"
+            android:text="0"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:id="@+id/score"
+            android:padding="0dp"
+            style="@style/Widget.Miriad.TextView"
+            android:text="0"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:id="@+id/timer"
+            android:padding="0dp"
+            style="@style/Widget.Miriad.TextView"
+            android:text="5:00"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:id="@+id/linearLayout6"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="20"
+        android:id="@+id/questionTimerTextView"
+       />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/linearLayout6"
+        android:id="@+id/linearLayout3"
+        android:layout_marginBottom="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:id="@+id/questionNumber"
+            android:textSize="18dp"
+            android:textColor="@color/Primary_Color1"
+            android:layout_marginRight="5dp"
+            android:text="Ques1 "/>
+
+        <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/question"
+    android:textSize="18dp"
+            android:textColor="@color/Primary_Color1"
+    android:text="Who was F.R.I.E.N.D.S producer?"/>
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/constraintLayout"
+        android:layout_below="@id/linearLayout3">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        app:cardElevation="5dp"
+        android:layout_margin="5dp"
+        android:id="@+id/imageCard"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/abc_vector_test"
+            android:id="@+id/image"/>
+    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/linearLayout4"
+        android:layout_below="@id/constraintLayout"
+        android:layout_marginBottom="5dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1"
+            android:elevation="2dp"
+            app:cardElevation="2dp"
+            android:id="@+id/answer1Card"
+            android:clickable="true">
+            <TextView
+                android:layout_width="match_parent"
+              style="@style/Widget.Miriad.TextView"
+                android:textColor="@color/Primary_Color1"
+                android:layout_height="match_parent"
+
+                android:id="@+id/answer1"
+                android:text="Answer1"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="5dp"
+            android:id="@+id/answer2Card"
+            android:clickable="true"
+            android:elevation="2dp"
+            app:cardElevation="2dp">
+            <TextView
+                android:layout_width="match_parent"
+                style="@style/Widget.Miriad.TextView"
+                android:layout_height="match_parent"
+                android:textColor="@color/Primary_Color1"
+                android:id="@+id/answer2"
+                android:text="Answer2"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/linearLayout4"
+        android:id="@+id/linearLayout5"
+        android:layout_marginBottom="5dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1"
+            android:elevation="2dp"
+            app:cardElevation="2dp"
+
+            android:id="@+id/answer3Card"
+            android:clickable="true">
+            <TextView
+                android:layout_width="match_parent"
+                style="@style/Widget.Miriad.TextView"
+                android:layout_height="match_parent"
+                android:id="@+id/answer3"
+                android:textColor="@color/Primary_Color1"
+                android:text="Answer3"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="5dp"
+            android:id="@+id/answer4Card"
+            android:clickable="true"
+            android:elevation="2dp"
+            app:cardElevation="2dp">
+            <TextView
+                android:layout_width="match_parent"
+                style="@style/Widget.Miriad.TextView"
+                android:layout_height="match_parent"
+                android:id="@+id/answer4"
+                android:textColor="@color/Primary_Color1"
+                android:text="Answer4"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearLayout5"
+        android:layout_above="@id/skip"></LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SKIP"
+        android:id="@+id/skip"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="0dp"
+        android:layout_alignParentRight="true"
+
+        />
+
+</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loadingLayout"
+        android:orientation="vertical"
+      >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/Primary_Color1"
+                android:textSize="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="200dp"
+                android:fontFamily="@font/dancing"
+                style="@style/Widget.Miriad.TextView"
+                android:text="Loading..."
+                android:elevation="1dp"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/gifImage"
+                android:layout_gravity="center"
+                android:src="@drawable/giphy"/>
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/themeGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:elevation="6dp"
+        android:visibility="gone"
+
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gameOverLayout"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/Widget.Miriad.TextView"
+            android:text="GAME OVER"/>
+
+           <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Score"
+
+            android:id="@+id/displayScore"
+            style="@style/Widget.Miriad.TextView"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Best Score"
+
+               android:id="@+id/displayBestScore"
+               style="@style/Widget.Miriad.TextView"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:id="@+id/timeTaken"
+            style="@style/Widget.Miriad.TextView"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playAgain"
+            android:textSize="20dp"
+            android:text="Play Again"/>
+    </LinearLayout>
+</FrameLayout>

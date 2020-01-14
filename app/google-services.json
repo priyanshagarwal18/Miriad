@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "694069029139",
+    "firebase_url": "https://miriad007.firebaseio.com",
+    "project_id": "miriad007",
+    "storage_bucket": "miriad007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694069029139:android:71b59d4860d4038aef52e6",
+        "android_client_info": {
+          "package_name": "com.priyanshagarwal.miriad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694069029139-5l5jlibf71unhfarsnbshr5c8onl3i0g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.priyanshagarwal.miriad",
+            "certificate_hash": "1e92b7f691da68b3358f06df661bc60a2952321d"
+          }
+        },
+        {
+          "client_id": "694069029139-gi7ekdpebgo6h6ekc8ldr3d1cftrnco3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyUnJDq5e8VPyOP1IUvJ_-x_yrHrfNspU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694069029139-gi7ekdpebgo6h6ekc8ldr3d1cftrnco3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
