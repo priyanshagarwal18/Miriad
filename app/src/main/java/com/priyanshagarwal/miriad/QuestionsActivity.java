@@ -251,6 +251,7 @@ public class QuestionsActivity extends AppCompatActivity {
 //    TextView answer1,answer2,answer3,answer4,question;
  int i=0;
     int timer_flag=1;
+    List<String> bestScoreList;
     int delay=500,delay1=delay;
     int total_time=10000;
     int received=0;
@@ -321,10 +322,10 @@ public class QuestionsActivity extends AppCompatActivity {
 //        menuInflater.inflate(R.menu.mrd_toolbar_menu, menu);
 //        super.onCreateOptionsMenu(menu, );
 //    }
-
+DatabaseReference databaseReference;
     void getData()
     {
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
         //        User user=databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         final String id=FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        databaseReference.child("Users").child(id).child("username").setValue("user@priyansh");
@@ -339,6 +340,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(ds.getKey()))
                     {
                        user=ds.getValue(User.class);
+                       bestScoreList=user.getBest();
                        userNameTextView.setText("Hi "+user.getFirstName());
                     }
                 }
@@ -560,11 +562,60 @@ public class QuestionsActivity extends AppCompatActivity {
             correctSound.release();
             stuckSound.release();
             gameOverLayout.setVisibility(View.VISIBLE);
+            int highscore=0,k=0;
+            String[] arr={"FRIENDS","0","0"};
+            if(user.getBest()!=null)
+            for(k=0;k<user.getBest().size();k++)
+            {
+                arr=user.getBest().get(k).split(",");
+                if(arr[0].equals(theme))
+                {
+                    if(total_time==300000)
+                    {
+                        highscore=Integer.parseInt(arr[1]);
+                    }
+                    else
+                        highscore=Integer.parseInt(arr[2]);
+                    break;
+                }
+            }
+            else
+                highscore=0;
             if(scoreKeeper>0)
-            scoreKeeper+=counter/timePenalty;
+                scoreKeeper+=counter/timePenalty;
             displayScore.setText("Score : "+Integer.toString(scoreKeeper));
             displayTime.setText("Time Taken : "+Integer.toString((total_time/1000-counter)/60)+":"+Integer.toString((total_time/1000-counter)%60));
-            displayBestScore.setText(Long.toString(extra));
+
+            if(scoreKeeper>highscore)
+            {
+                highscore=scoreKeeper;
+                if(user.getBest()!=null&&k!=user.getBest().size())
+                {
+                    if(total_time==300000)
+                        bestScoreList.set(k,theme+","+Integer.toString(highscore)+","+arr[2]);
+                    else
+                        bestScoreList.set(k,theme+","+arr[1]+","+Integer.toString(highscore));
+                }
+                else
+                {
+                    bestScoreList=new ArrayList<String>();
+                    if(total_time==300000)
+                        bestScoreList.add(theme+","+Integer.toString(highscore)+","+arr[2]);
+                    else
+                        bestScoreList.add(theme+","+arr[1]+","+Integer.toString(highscore));
+                    user.setBest(bestScoreList);
+
+                }
+                databaseReference.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("best").setValue(user.getBest());
+            }
+
+            displayBestScore.setText("Best Score:"+Integer.toString(highscore));
+
+//            if(scoreKeeper>0)
+//            scoreKeeper+=counter/timePenalty;
+//            displayScore.setText("Score : "+Integer.toString(scoreKeeper));
+//            displayTime.setText("Time Taken : "+Integer.toString((total_time/1000-counter)/60)+":"+Integer.toString((total_time/1000-counter)%60));
+//            displayBestScore.setText("Best Score:"+Integer.toString(scoreKeeper));
         }
 
     }
@@ -650,6 +701,21 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 total_time=300000;
+                int highscore=0,k;
+                String[] arr;
+                if(user.getBest()!=null)
+                for(k=0;k<user.getBest().size();k++)
+                {
+                    arr=user.getBest().get(k).split(",");
+                    if(arr[0].equals(theme))
+                    {
+                            highscore=Integer.parseInt(arr[1]);
+                        break;
+                    }
+                }
+                else
+                    highscore=0;
+                bestScore.setText(Integer.toString(highscore));
                 counter=total_time/1000+1;
                 timeLayout.setVisibility(View.GONE);
                 questionLayout.setVisibility(View.VISIBLE);
@@ -665,6 +731,22 @@ public class QuestionsActivity extends AppCompatActivity {
                 counter=total_time/1000+1;
                 timeLayout.setVisibility(View.GONE);
                 questionLayout.setVisibility(View.VISIBLE);
+                int highscore=0,k;
+                String[] arr;
+                if(user.getBest()!=null)
+                for(k=0;k<user.getBest().size();k++)
+                {
+                    arr=user.getBest().get(k).split(",");
+                    if(arr[0].equals(theme))
+                    {
+                        highscore=Integer.parseInt(arr[2]);
+                        break;
+                    }
+                }
+                else
+                    highscore=0;
+                bestScore.setText(Integer.toString(highscore));
+
                 counter1=questionTimer+1;
                 countDownTimer=countDownTimer2( questionLayout,gameOverLayout,imageView,imageCard,question,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
                 countDownTimer.start();
@@ -1061,11 +1143,59 @@ public class QuestionsActivity extends AppCompatActivity {
                         wrongSound.release();
                         correctSound.release();
                         stuckSound.release();
+                        int highscore=0,k=0;
+                        String[] arr={"FRIENDS","0","0"};
+                        if(user.getBest()!=null)
+                        for(k=0;k<user.getBest().size();k++)
+                        {
+                            arr=user.getBest().get(k).split(",");
+                            if(arr[0].equals(theme))
+                            {
+                                if(total_time==300000)
+                                {
+                                    highscore=Integer.parseInt(arr[1]);
+                                }
+                                else
+                                    highscore=Integer.parseInt(arr[2]);
+                                break;
+                            }
+                        }
+                        else
+                        highscore=0;
                         if(scoreKeeper>0)
-                        scoreKeeper+=counter/timePenalty;
+                            scoreKeeper+=counter/timePenalty;
                         displayScore.setText("Score : "+Integer.toString(scoreKeeper));
                         displayTime.setText("Time Taken : "+Integer.toString((total_time/1000-counter)/60)+":"+Integer.toString((total_time/1000-counter)%60));
-                        displayBestScore.setText(Long.toString(extra));
+
+                        if(scoreKeeper>highscore)
+                        {
+                            highscore=scoreKeeper;
+                            if(user.getBest()!=null&&k!=user.getBest().size())
+                            {
+                                if(total_time==300000)
+                                    bestScoreList.set(k,theme+","+Integer.toString(highscore)+","+arr[2]);
+                                else
+                                    bestScoreList.set(k,theme+","+arr[1]+","+Integer.toString(highscore));
+                            }
+                            else
+                            {
+                                bestScoreList=new ArrayList<String>();
+                                if(total_time==300000)
+                                    bestScoreList.add(theme+","+Integer.toString(highscore)+","+arr[2]);
+                                else
+                                    bestScoreList.add(theme+","+arr[1]+","+Integer.toString(highscore));
+                                user.setBest(bestScoreList);
+                            }
+                            databaseReference.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("best").setValue(user.getBest());
+                        }
+
+                        displayBestScore.setText("Best Score:"+Integer.toString(highscore));
+
+//                        if(scoreKeeper>0)
+//                        scoreKeeper+=counter/timePenalty;
+//                        displayScore.setText("Score : "+Integer.toString(scoreKeeper));
+//                        displayTime.setText("Time Taken : "+Integer.toString((total_time/1000-counter)/60)+":"+Integer.toString((total_time/1000-counter)%60));
+//                        displayBestScore.setText("Best Score:"+Integer.toString(scoreKeeper));
                     }
                 };
                 if(received==3) {
@@ -1167,11 +1297,53 @@ public class QuestionsActivity extends AppCompatActivity {
             public void onFinish() {
                 questionLayout1.setVisibility(View.GONE);
                 gameOverLayout1.setVisibility(View.VISIBLE);
+                int highscore=0,k=0;
+                String[] arr={"FRIENDS","0","0"};
+                if(user.getBest()!=null)
+                for(k=0;k<user.getBest().size();k++)
+                {
+                    arr=user.getBest().get(k).split(",");
+                    if(arr[0].equals(theme))
+                    {
+                        if(total_time==300000)
+                        {
+                            highscore=Integer.parseInt(arr[1]);
+                        }
+                        else
+                            highscore=Integer.parseInt(arr[2]);
+                        break;
+                    }
+                }
+                else
+                    highscore=0;
                 if(scoreKeeper>0)
                     scoreKeeper+=counter/timePenalty;
                 displayScore.setText("Score : "+Integer.toString(scoreKeeper));
                 displayTime.setText("Time Taken : "+Integer.toString((total_time/1000-counter)/60)+":"+Integer.toString((total_time/1000-counter)%60));
-                displayBestScore.setText(Long.toString(extra));
+
+                if(scoreKeeper>highscore)
+                {
+                    highscore=scoreKeeper;
+                    if(user.getBest()!=null&&k!=user.getBest().size())
+                    {
+                        if(total_time==300000)
+                            bestScoreList.set(k,theme+","+Integer.toString(highscore)+","+arr[2]);
+                        else
+                            bestScoreList.set(k,theme+","+arr[1]+","+Integer.toString(highscore));
+                    }
+                    else
+                    {
+                        bestScoreList=new ArrayList<String>();
+                        if(total_time==300000)
+                            bestScoreList.add(theme+","+Integer.toString(highscore)+","+arr[2]);
+                        else
+                            bestScoreList.add(theme+","+arr[1]+","+Integer.toString(highscore));
+                        user.setBest(bestScoreList);
+                    }
+                    databaseReference.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("best").setValue(user.getBest());
+                }
+
+                displayBestScore.setText("Best Score:"+Integer.toString(highscore));
             }
         };
     }

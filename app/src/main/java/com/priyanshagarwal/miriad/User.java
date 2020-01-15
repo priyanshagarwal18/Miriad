@@ -6,6 +6,10 @@ import java.util.List;
 public class User implements Serializable {
     private String firstName,lastName;
 
+    public void setBest(List<String> best) {
+        this.best = best;
+    }
+
     private List<String> best;
     private String username,password;
     private String email,phoneNo;

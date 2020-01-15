@@ -43,7 +43,7 @@
                 android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text=""
                 android:textSize="16dp"
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceBody2" />
