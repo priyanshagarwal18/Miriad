@@ -6,7 +6,7 @@
     app:cardBackgroundColor="@android:color/transparent"
     app:cardElevation="0dp"
     app:cardPreventCornerOverlap="true"
-    app:contentPaddingTop="@dimen/mrd_staggered_product_grid_margin_top_first">
+    app:contentPaddingTop="32dp">
 
     <!-- Product card layout used in MDC-103 and onward -->
     <LinearLayout

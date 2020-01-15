@@ -302,6 +302,10 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 errorNull();
+                firstNameEditText.setText("");
+                lastNameEditText.setText("");
+                phoneNoEditText.setText("");
+                emailEditText.setText("");
                 passwordEditText.setText(null);
                 passwordReenterEditText.setText(null);
                 usernameEditText.setText(null);
@@ -376,9 +380,24 @@ public class LoginFragment extends Fragment {
 //        emailEditText.getParent().requestFocus();
         return view;
     }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        try{
+            String a=FirebaseAuth.getInstance().getCurrentUser().getUid();
+            getActivity().finish();
+        }
+        catch (Exception e)
+        {
+
+        }
+//        if(mAuth.getCurrentUser()!=null)
+//            getActivity().finish();
+    }
+
 
     private void signIn(String email, String password) {
-
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -397,6 +416,10 @@ public class LoginFragment extends Fragment {
 //                            for(i=0;i<best.size();i++)
 //                            intent.putExtra(Integer.toString(i),best.get(i));
 //                            intent.putExtra("size",Integer.toString(i));
+                            resetButton.setSoundEffectsEnabled(false);
+                            resetButton.performClick();
+                            resetButton.setSoundEffectsEnabled(true);
+                            errorNull();
                             startActivity(intent);
                         } else {
 //                             If sign in fails, display a message to the user.
@@ -449,11 +472,15 @@ public class LoginFragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         errorNull();
                                         Intent intent=new Intent(getContext(),QuestionsActivity.class);
-                                        intent.putExtra("name",firstName);
+//                                        intent.putExtra("name",firstName);
 //                                        int i;
 //                                        for(i=0;i<best.size();i++)
 //                                            intent.putExtra(Integer.toString(i),best.get(i));
 //                                        intent.putExtra("size",Integer.toString(i));
+                                        resetButton.setSoundEffectsEnabled(false);
+                                        resetButton.performClick();
+                                        resetButton.setSoundEffectsEnabled(true);
+                                        errorNull();
                                         startActivity(intent);
 
                                     } else {

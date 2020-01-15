@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
@@ -168,7 +169,11 @@ RelativeLayout questionLayout;
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     q.setTheme(viewHolder.themeName.getText());
+                                    q.exitSound=new MediaPlayer();
                                     setMusicPlayer(q.exitSound,viewHolder.exitSound);
+                                    q.correctSound=new MediaPlayer();
+                                    q.wrongSound=new MediaPlayer();
+                                    q.stuckSound=new MediaPlayer();
                                     setMusicPlayer(q.correctSound,viewHolder.correctSound);
                                     setMusicPlayer(q.wrongSound,viewHolder.wrongSound);
                                     setMusicPlayer(q.stuckSound,viewHolder.stuckSound);
@@ -279,19 +284,43 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView userNameTextView;
     MediaPlayer exitSound =new MediaPlayer(),stuckSound=new MediaPlayer(),correctSound=new MediaPlayer(), wrongSound=new MediaPlayer();
     User user;
-    private void setUpToolbar(View view) {
-        Toolbar toolbar = view.findViewById(R.id.app_bar);
 
-        if (this != null) {
-            this.setSupportActionBar(toolbar);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.logout) {
+            FirebaseAuth mAuth=FirebaseAuth.getInstance();
+            mAuth.signOut();
+            finish();
+            Toast.makeText(QuestionsActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
+            return true;
         }
-//        toolbar.setNavigationOnClickListener(new NavigationIconClickListener(this.getApplicationContext(), view.findViewById(R.id.product_grid), new AccelerateDecelerateInterpolator(),getContext().getResources().getDrawable(R.drawable.shr_branded_menu), // Menu open icon
-//                getContext().getResources().getDrawable(R.drawable.shr_close_menu)));
+        if(id==R.id.accountSettigs)
+        {
+            Intent intent=new Intent(QuestionsActivity.this,AccountSettings.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("User Data", user);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
-    public void onCreateOptionsMenu(Menu menu) {
-        menuInflater.inflate(R.menu.mrd_toolbar_menu, menu);
-        super.onCreateOptionsMenu(menu, );
-    }
+//    public void onCreateOptionsMenu(Menu menu) {
+//        menuInflater.inflate(R.menu.mrd_toolbar_menu, menu);
+//        super.onCreateOptionsMenu(menu, );
+//    }
 
     void getData()
     {
@@ -402,7 +431,9 @@ public class QuestionsActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if(messageNumber==0)
+                            {
                                 finish();
+                            }
                             else
                             {
                                 playAgain1.setSoundEffectsEnabled(false);
@@ -501,11 +532,18 @@ public class QuestionsActivity extends AppCompatActivity {
                 { imageCard.setVisibility(View.VISIBLE);
                 imageCard.setCardElevation(5);
                     imageCard.setElevation(5);
+                    imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                    imageView.setImageBitmap(decodedImage);
+                }
+                else
+                {
+                    imageCard.setVisibility(View.GONE);
+                    imageCard.setCardElevation(0);
+                    imageCard.setElevation(0);
                 }
 
-                imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-                Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                imageView.setImageBitmap(decodedImage);
+
 
             } catch (IllegalArgumentException e) {
                 imageCard.setVisibility(View.GONE);
@@ -574,11 +612,14 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
         getData();
+        Toolbar toolbar=findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
         final TextView answer1=findViewById(R.id.answer1);
         final TextView answer2=findViewById(R.id.answer2);
         final TextView answer3=findViewById(R.id.answer3);
         final TextView counttime= findViewById(R.id.timer);
         userNameTextView=findViewById(R.id.userNameTextView);
+        userNameTextView.setVisibility(View.GONE);
         countTime=counttime;
         final TextView answer4=findViewById(R.id.answer4);
         final TextView question=findViewById(R.id.question);
@@ -704,8 +745,16 @@ public class QuestionsActivity extends AppCompatActivity {
         cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stuckSound.isPlaying())
-                    stuckSound.stop();
+                skip.setClickable(false);
+                clickableFalse(cardView1,cardView2,cardView3,cardView4);
+
+                try{
+                    if(stuckSound.isPlaying())
+                        stuckSound.stop();}
+                catch (IllegalStateException e)
+                {
+
+                }
                 timer_flag=0;
                 countDownTimer.cancel();
 //                if(cardNumber==1)
@@ -732,8 +781,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     answer1.setTextColor(Color.WHITE);
                     setGreen(cardNumber,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
                 }
-                clickableFalse(cardView1,cardView2,cardView3,cardView4);
-                //skip.setClickable(false);
+
                 new Handler().postDelayed(new Runnable() {
 
                     @Override
@@ -742,10 +790,11 @@ public class QuestionsActivity extends AppCompatActivity {
 
                         i++;
                         setCards(questionLayout,gameOverLayout,imageView,imageCard,question,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
-                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
-                        //skip.setClickable(true);
+
                         timer_flag=1;
                         countDownTimer.start(extra);
+                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
+                        skip.setClickable(true);
                     }
                 }, delay1 );
             }
@@ -753,10 +802,17 @@ public class QuestionsActivity extends AppCompatActivity {
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                skip.setClickable(false);
+                clickableFalse(cardView1,cardView2,cardView3,cardView4);
+
                 timer_flag=0;
-                if(stuckSound.isPlaying())
-                    stuckSound.stop();
-                countDownTimer.cancel();
+                try{
+                    if(stuckSound.isPlaying())
+                        stuckSound.stop();}
+                catch (IllegalStateException e)
+                {
+
+                }
 //                if(cardNumber==2)
                 cardNumber=setCardNumber(answer1,answer2,answer3,answer4,correctAnswer);
 
@@ -779,8 +835,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     delay1=(wrongSound.getDuration()>delay)?wrongSound.getDuration():delay;
                     setGreen(cardNumber,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
                 }
-                clickableFalse(cardView1,cardView2,cardView3,cardView4);
-                //skip.setClickable(false);
+
 
 //                cardView2.setElevation(2);
 //                cardView2.setCardElevation(4);
@@ -791,10 +846,11 @@ public class QuestionsActivity extends AppCompatActivity {
                         //do something
                         i++;
                         setCards(questionLayout,gameOverLayout,imageView,imageCard,question,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
-                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
-                        //skip.setClickable(true);
+
                         timer_flag=1;
                         countDownTimer.start(extra);
+                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
+                        skip.setClickable(true);
                     }
                 }, delay1);
             }
@@ -802,9 +858,17 @@ public class QuestionsActivity extends AppCompatActivity {
         cardView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                skip.setClickable(false);
+                clickableFalse(cardView1,cardView2,cardView3,cardView4);
+
                 timer_flag=0;
+                try{
                 if(stuckSound.isPlaying())
-                    stuckSound.stop();
+                    stuckSound.stop();}
+                catch (IllegalStateException e)
+                {
+
+                }
                 countDownTimer.cancel();
 //                if(cardNumber==3)
                 cardNumber=setCardNumber(answer1,answer2,answer3,answer4,correctAnswer);
@@ -825,8 +889,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     answer3.setTextColor(Color.WHITE);
                     setGreen(cardNumber,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
                 }
-                clickableFalse(cardView1,cardView2,cardView3,cardView4);
-                //skip.setClickable(false);
+
 
 //                cardView3.setElevation(2);
 //                cardView3.setCardElevation(4);
@@ -837,10 +900,11 @@ public class QuestionsActivity extends AppCompatActivity {
                         //do something
                         i++;
                         setCards(questionLayout,gameOverLayout,imageView,imageCard,question,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
-                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
-                        //skip.setClickable(true);
+
                         timer_flag=1;
                         countDownTimer.start(extra);
+                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
+                        skip.setClickable(true);
                     }
                 }, delay1 );
             }
@@ -848,12 +912,20 @@ public class QuestionsActivity extends AppCompatActivity {
         cardView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                skip.setClickable(false);
+                clickableFalse(cardView1,cardView2,cardView3,cardView4);
+
+
                 timer_flag=0;
 //                try{
                 countDownTimer.cancel();
-                if(stuckSound.isPlaying())
-                    stuckSound.stop();
-//                }
+                try{
+                    if(stuckSound.isPlaying())
+                        stuckSound.stop();}
+                catch (IllegalStateException e)
+                {
+
+                }
 //                catch (InterruptedException e)
 //                {
 //
@@ -880,7 +952,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     delay1=(wrongSound.getDuration()>delay)?wrongSound.getDuration():delay;
                     setGreen(cardNumber,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
                 }
-                clickableFalse(cardView1,cardView2,cardView3,cardView4);
+//                clickableFalse(cardView1,cardView2,cardView3,cardView4);
                 //skip.setClickable(false);
 
 //                cardView4.setElevation(2);
@@ -892,10 +964,12 @@ public class QuestionsActivity extends AppCompatActivity {
                         //do something
                         i++;
                         setCards(questionLayout,gameOverLayout,imageView,imageCard,question,answer1,answer2,answer3,answer4,cardView1,cardView2,cardView3,cardView4);
-                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
-                        //skip.setClickable(true);
+
+
                         timer_flag=1;
                         countDownTimer.start(extra);
+                        clickableTrue(cardView1,cardView2,cardView3,cardView4);
+                        skip.setClickable(true);
                     }
                 }, delay1);
             }

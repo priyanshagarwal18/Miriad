@@ -8,7 +8,6 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:elevation="0dp"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
@@ -17,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:paddingStart="12dp"
+            app:subtitleTextColor="#ffffff"
             android:paddingLeft="12dp"
             android:paddingEnd="12dp"
             android:paddingRight="12dp"
@@ -29,15 +29,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/userNameTextView"
         android:text="HI"
+        android:layout_marginTop="56dp"
         android:textSize="30dp"
         android:textColor="@color/Primary_Color1"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/timeLayout"
-        android:layout_margin="10dp"
         android:visibility="gone"
-        android:padding="5dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/newThemeColorPrimaryDark"
+        android:padding="15dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,14 +51,24 @@
             android:layout_height="wrap_content"
             style="@style/Widget.Miriad.TextView"
             android:text="Choose Time"
+            android:textSize="40sp"
+            android:layout_marginBottom="40dp"
+            android:textColor="#ffffff"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5:00"
+            app:strokeColor="#fff"
+            app:strokeWidth="2dp"
+            android:padding="15dp"
             android:layout_margin="30dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/five"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/newThemeColorPrimaryDark"
+            android:textColor="#fff"
+
 
             />
             <Button
@@ -66,6 +78,12 @@
                 android:layout_margin="30dp"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/ten"
+                app:cornerRadius="25dp"
+                android:backgroundTint="@color/newThemeColorPrimaryDark"
+                android:textColor="#fff"
+                app:strokeColor="#fff"
+                app:strokeWidth="2dp"
+                android:padding="15dp"
 
                 />
         </LinearLayout>
@@ -73,8 +91,10 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:layout_margin="10dp"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     android:visibility="gone"
     android:id="@+id/questionLayout"
     android:padding="5dp">
@@ -333,25 +353,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/loadingLayout"
         android:orientation="vertical"
+        
       >
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/Primary_Color1"
-                android:textSize="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="200dp"
-                android:fontFamily="@font/dancing"
-                style="@style/Widget.Miriad.TextView"
-                android:text="Loading..."
-                android:elevation="1dp"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/Primary_Color1"-->
+<!--                android:textSize="60dp"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="200dp"-->
+<!--                android:fontFamily="@font/dancing"-->
+<!--                style="@style/Widget.Miriad.TextView"-->
+<!--                android:text="Loading..."-->
+<!--                android:elevation="1dp"/>-->
             <ImageView
                 android:layout_width="300dp"
                 android:layout_height="300dp"
@@ -372,7 +394,8 @@
         android:layout_gravity="center_vertical"
         android:elevation="6dp"
         android:visibility="gone"
-
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -387,13 +410,18 @@
         android:layout_height="match_parent"
         android:id="@+id/gameOverLayout"
         android:gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
+        android:background="@color/newThemeColorPrimaryDark"
         android:visibility="gone"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="#fff"
+
             style="@style/Widget.Miriad.TextView"
             android:text="GAME OVER"/>
 
@@ -401,13 +429,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Score"
+               android:textSize="30sp"
+               android:textColor="#fff"
 
-            android:id="@+id/displayScore"
+               android:id="@+id/displayScore"
             style="@style/Widget.Miriad.TextView"/>
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Best Score"
+               android:textSize="30sp"
+               android:textColor="#fff"
+
 
                android:id="@+id/displayBestScore"
                style="@style/Widget.Miriad.TextView"/>
@@ -417,12 +450,23 @@
             android:layout_height="wrap_content"
             android:text="Time"
             android:id="@+id/timeTaken"
+            android:textSize="30sp"
+            android:textColor="#fff"
+
             style="@style/Widget.Miriad.TextView"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/playAgain"
             android:textSize="20dp"
-            android:text="Play Again"/>
+            android:text="Play Again"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/newThemeColorPrimaryDark"
+            android:textColor="#fff"
+            app:strokeColor="#fff"
+            app:strokeWidth="2dp"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"
+            />
     </LinearLayout>
 </FrameLayout>

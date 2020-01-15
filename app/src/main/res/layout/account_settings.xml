@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/newThemeColorPrimaryDark"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/newThemeColorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello Priyansh,"
+        android:id="@+id/hello_textView"
+        android:textColor="#fff"
+        android:textSize="40sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/view2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:elevation="12dp"
+        app:cardCornerRadius="40dp">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person_outline_black_24dp" />
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/newThemeDarkPink"
+        android:clickable="false"
+        android:text="the_real_coder"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:id="@+id/username_button"
+        android:textSize="20sp"
+        app:cornerRadius="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:id="@+id/email_textView"
+        android:text="pagarwal@cs.iitr.ac.in"
+        android:textColor="#fff"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:id="@+id/phoneno_textView"
+        android:text="9690317516"
+        android:textColor="#fff"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:id="@+id/bestScore_textView"
+        android:text="Best Score : 1000"
+        android:textColor="#fff"
+        android:textSize="24sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="@color/newThemeColorPrimaryDark"
+        android:elevation="0dp"
+        android:id="@+id/changePasswordButton"
+        android:shadowColor="@color/newThemeColorPrimaryDark"
+        android:text="@string/mrd_underlined_change_text"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/changePasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/old_password_text_input"
+            style="@style/Widget.Miriad.DarkTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:hint="Old password"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/offWhite">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/old_password_edit_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/offWhite"
+                android:layout_height="wrap_content"
+
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/new_password_text_input"
+            style="@style/Widget.Miriad.DarkTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:hint="New password"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/offWhite">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_password_edit_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/offWhite"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_password_text_input"
+            style="@style/Widget.Miriad.DarkTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:hint="Confirm password"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/offWhite">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_password_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/offWhite"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:visibility="invisible"
+            android:layout_weight="1" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="14dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/buttonLayout"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/update_button"
+                android:text="Update"
+                android:layout_alignParentRight="true"
+                android:elevation="0dp"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="@color/newThemeColorPrimaryDark"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:textColor="@color/white"
+                android:padding="15dp"
+                app:cornerRadius="5dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/update_button"
+                android:id="@+id/cancel_button"
+                android:text="Cancel"
+                android:elevation="0dp"
+                android:layout_toLeftOf="@+id/update_button"
+                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp"
+                android:backgroundTint="@color/newThemeDarkPink"
+                android:textColor="@color/white"
+                android:padding="15dp"
+                app:cornerRadius="5dp"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

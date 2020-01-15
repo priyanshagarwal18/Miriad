@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface QuestionsApi {
-    @GET("46e2dd285328d7f38479e07177e85c4c/raw/567ea569f3ed3b98a8a3d789bb8bf5c536db45c1/themeBasedAppQuestions.json")
+    @GET("46e2dd285328d7f38479e07177e85c4c/raw/8d3156091ead014e08349c3a60eb5ee631d24e85/themeBasedAppQuestions.json")
     Call<List<Questions>> getQuestions();
 }
